@@ -19,6 +19,10 @@ namespace PlateupSaveManager.ViewModels
             string saveManagerFiles = directories.GetValue<string>("saveManagerLocation");
             string localLow = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData).Replace("Roaming", "LocalLow");
             string saveFilesLocation = Path.Combine(localLow, saveManagerFiles);
+
+            if (!Directory.Exists(saveFilesLocation))
+                Directory.CreateDirectory(saveFilesLocation);
+
             var listOfFiles =
                 Directory.GetDirectories(saveFilesLocation)
                 .Select(Path.GetFileName)
