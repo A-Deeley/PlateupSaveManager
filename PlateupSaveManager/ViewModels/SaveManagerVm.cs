@@ -1,9 +1,12 @@
 ﻿using inpce.core.Library.Extensions;
 using Microsoft.Extensions.Configuration;
+using PlateupSaveManager.Extensions;
 using PlateupSaveManager.Interfaces;
 using RelayCommandLibrary;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
@@ -34,7 +37,11 @@ namespace PlateupSaveManager.ViewModels
             set => this.SetProperty(ref _saveName, value, PropertyChanged);
         }
 
-        
+        ObservableCollection<SaveFile> _saveFiles; public ObservableCollection<SaveFile> SaveFiles
+        {
+            get => _saveFiles;
+            set => this.SetProperty(ref _saveFiles, value, PropertyChanged);
+        }
 
         public event PropertyChangedEventHandler? PropertyChanged;
 
@@ -111,9 +118,10 @@ namespace PlateupSaveManager.ViewModels
 
         #endregion
 
-        public SaveManagerVm(IConfigurationSection directories)
+        public SaveManagerVm(IConfigurationSection directories, IEnumerable<SaveFile> saves)
         {
             ConfigureRelayCommands();
+            SaveFiles = saves.ConvertToObservable();
             _relativeSaveManagerDir = directories.GetValue<string>("saveManagerLocation");
             _relativePlateupSaveDir = directories.GetValue<string>("plateupSaveFileLocation");
         }
