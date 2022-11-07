@@ -99,7 +99,7 @@ namespace PlateupSaveManager.ViewModels
         #region CanExecutes
         private bool Save_CanExecute(object _)
         {
-            return _currentSave is null;
+            return false;
         }
 
         private bool NewSave_CanExecute(object _)
