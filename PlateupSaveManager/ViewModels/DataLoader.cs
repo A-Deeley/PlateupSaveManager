@@ -1,5 +1,7 @@
 ﻿using Microsoft.Extensions.Configuration;
+using PlateupSaveManager.Events;
 using PlateupSaveManager.Interfaces;
+using PlateupSaveManager.Views;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -10,21 +12,24 @@ using System.Threading.Tasks;
 
 namespace PlateupSaveManager.ViewModels
 {
-    internal class DataLoaderVm : IDataContext
+    internal class DataLoader
     {
-        public event PropertyChangedEventHandler? PropertyChanged;
+        private readonly string _saveFilesLocation;
 
-        public DataLoaderVm(IConfigurationSection directories)
+        internal DataLoader(IConfigurationSection directories)
         {
             string saveManagerFiles = directories.GetValue<string>("saveManagerLocation");
             string localLow = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData).Replace("Roaming", "LocalLow");
-            string saveFilesLocation = Path.Combine(localLow, saveManagerFiles);
+            _saveFilesLocation = Path.Combine(localLow, saveManagerFiles);
+        }
 
-            if (!Directory.Exists(saveFilesLocation))
-                Directory.CreateDirectory(saveFilesLocation);
+        internal IEnumerable<SaveFile> LoadFiles()
+        {
+            if (!Directory.Exists(_saveFilesLocation))
+                Directory.CreateDirectory(_saveFilesLocation);
 
             var listOfFiles =
-                Directory.GetDirectories(saveFilesLocation)
+                Directory.GetDirectories(_saveFilesLocation)
                 .Select(Path.GetFileName)
                 .ToList();
 
@@ -33,6 +38,8 @@ namespace PlateupSaveManager.ViewModels
             foreach (var file in listOfFiles)
                 if (file is not null)
                     saveFiles.Add(new(file));
+
+            return saveFiles;
         }
     }
 }

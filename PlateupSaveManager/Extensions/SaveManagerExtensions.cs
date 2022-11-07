@@ -1,11 +1,7 @@
 ﻿using PlateupSaveManager.Interfaces;
-using System;
+using System.CodeDom.Compiler;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Controls;
 
 namespace PlateupSaveManager.Extensions
@@ -14,7 +10,7 @@ namespace PlateupSaveManager.Extensions
     {
         internal static TPage SetDataContext<TPage, TDataContext>(this TPage page, TDataContext context)
             where TPage : Page
-            where TDataContext : IDataContext
+            where TDataContext : IChangeView
         {
             page.DataContext = context;
             return page;
@@ -25,5 +21,9 @@ namespace PlateupSaveManager.Extensions
         {
             return new ObservableCollection<TClass>(list);
         }
+
+        internal static bool IsOfType<TType>(this Page page) => page.GetType() == typeof(TType);
+
+        internal static IEnumerable<TClass> ToEnumerable<TClass>(this object data) => (IEnumerable<TClass>)data;
     }
 }

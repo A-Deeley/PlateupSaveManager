@@ -1,5 +1,6 @@
 ﻿using inpce.core.Library.Extensions;
 using Microsoft.Extensions.Configuration;
+using PlateupSaveManager.Events;
 using PlateupSaveManager.Extensions;
 using PlateupSaveManager.Interfaces;
 using RelayCommandLibrary;
@@ -16,7 +17,7 @@ using System.Threading.Tasks;
 
 namespace PlateupSaveManager.ViewModels
 {
-    internal class SaveManagerVm : IDataContext
+    internal class SaveManagerVm : IDataContext, IChangeView
     {
         private readonly string localLowPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData).Replace("Roaming", "LocalLow");
         string _relativeSaveManagerDir; public string SaveManagerDir
@@ -44,6 +45,7 @@ namespace PlateupSaveManager.ViewModels
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;
+        public event EventHandler<ChangePageEventArgs> ChangePage;
 
         #region ICommands
         RelayCommand Save { get; set; }
