@@ -1,0 +1,54 @@
+﻿<Page x:Class="PlateupSaveManager.Views.SaveManager"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:PlateupSaveManager.Views"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="SaveManager">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Row="1" Grid.RowSpan="5" Grid.ColumnSpan="2">
+            <ItemsControl ScrollViewer.VerticalScrollBarVisibility="Visible">
+                <MenuItem>Save 1</MenuItem>
+                <MenuItem>Save 1</MenuItem>
+                <MenuItem>Save 1</MenuItem>
+                <MenuItem>Save 1</MenuItem>
+            </ItemsControl>
+        </Grid>
+        <Label VerticalAlignment="Center" HorizontalAlignment="Right" FontSize="26pt">Current save:</Label>
+        <Label VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="26pt" Grid.Column="1">[Save 1]</Label>
+        <Button Grid.Column="2" Grid.Row="0" Margin="15">Save</Button>
+        <Label VerticalAlignment="Bottom" HorizontalAlignment="Center" Grid.Column="2" Grid.Row="1">
+            <TextBlock FontSize="26pt" TextDecorations="Underline">
+                General options:
+            </TextBlock>
+        </Label>
+        <Button Grid.Column="2" Grid.Row="2" Margin="15">New Save</Button>
+        <Label VerticalAlignment="Bottom" HorizontalAlignment="Center" Grid.Column="2" Grid.Row="3">
+            <TextBlock FontSize="20pt" TextDecorations="Underline">
+                Current save options:
+            </TextBlock>
+        </Label>
+        <Button Grid.Column="2" Grid.Row="4" Margin="15">Activate</Button>
+        <Button Grid.Column="2" Grid.Row="5" Margin="15">Deactivate</Button>
+        <Button Grid.Column="2" Grid.Row="6" Margin="15">Rename</Button>
+        <Button Grid.Column="2" Grid.Row="7" Margin="15">Delete</Button>
+    </Grid>
+</Page>
