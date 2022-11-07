@@ -1,4 +1,5 @@
-﻿using PlateupSaveManager.Views;
+﻿using PlateupSaveManager.ViewModels;
+using PlateupSaveManager.Views;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -16,7 +17,8 @@ namespace PlateupSaveManager
     {
         private void Application_Startup(object sender, StartupEventArgs e)
         {
-            Window mainWindow = new MainWindow(); 
+            Window mainWindow = new MainWindow();
+            mainWindow.DataContext = new MainWindowVm();
             mainWindow.Show();
         }
     }

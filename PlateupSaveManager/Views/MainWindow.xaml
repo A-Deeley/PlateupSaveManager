@@ -4,9 +4,9 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PlateupSaveManager.Views"
+        xmlns:vm="clr-namespace:PlateupSaveManager.ViewModels"
+        d:DataContext="{d:DesignInstance vm:MainWindowVm}"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Frame>
-        
-    </Frame>
+        Title="MainWindow" Height="450" Width="800"
+        Content="{Binding CurrentWindow}">
 </Window>

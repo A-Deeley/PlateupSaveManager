@@ -24,13 +24,8 @@
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <Grid Grid.Row="1" Grid.RowSpan="5" Grid.ColumnSpan="2">
-            <ItemsControl ScrollViewer.VerticalScrollBarVisibility="Visible">
-                <MenuItem>Save 1</MenuItem>
-                <MenuItem>Save 1</MenuItem>
-                <MenuItem>Save 1</MenuItem>
-                <MenuItem>Save 1</MenuItem>
-            </ItemsControl>
+        <Grid Grid.Row="1" Grid.RowSpan="7" Grid.ColumnSpan="2">
+            <ListView ScrollViewer.VerticalScrollBarVisibility="Visible" Margin="15, 0"/>
         </Grid>
         <Label VerticalAlignment="Center" HorizontalAlignment="Right" FontSize="26pt">Current save:</Label>
         <Label VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="26pt" Grid.Column="1">[Save 1]</Label>
