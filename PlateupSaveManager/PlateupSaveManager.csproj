@@ -20,4 +20,15 @@
     </None>
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="dll\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="RelayCommandLibrary">
+      <HintPath>dll\RelayCommandLibrary.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+  </ItemGroup>
+
 </Project>
