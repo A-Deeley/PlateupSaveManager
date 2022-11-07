@@ -1,11 +1,6 @@
-﻿using PlateupSaveManager.ViewModels;
+﻿using Microsoft.Extensions.Configuration;
+using PlateupSaveManager.ViewModels;
 using PlateupSaveManager.Views;
-using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace PlateupSaveManager
@@ -17,8 +12,13 @@ namespace PlateupSaveManager
     {
         private void Application_Startup(object sender, StartupEventArgs e)
         {
+            ConfigurationBuilder configBuilder = new();
+            var config = configBuilder
+                .AddJsonFile(@".\settings.json")
+                .Build();
+
             Window mainWindow = new MainWindow();
-            mainWindow.DataContext = new MainWindowVm();
+            mainWindow.DataContext = new MainWindowVm(config);
             mainWindow.Show();
         }
     }
