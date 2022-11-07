@@ -31,7 +31,7 @@ namespace PlateupSaveManager.ViewModels
         private SaveManager CreateSaveManager()
         {
             var saveManager = new SaveManager();
-            var context = new SaveManagerVm(_configuration);
+            var context = new SaveManagerVm(_configuration.GetSection("directories"));
             return saveManager.SetDataContext(context);
         }
     }

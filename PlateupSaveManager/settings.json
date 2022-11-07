@@ -1,4 +1,6 @@
 {
-  "PlateupSaveFileLocation": "It's Happening\\PlateUp",
-  "SaveManagerLocation": "It's Happening\\PlateUp\\SaveManager"
+  "directories": {
+    "plateupSaveFileLocation": "It's Happening\\PlateUp",
+    "saveManagerLocation": "It's Happening\\PlateUp\\SaveManager"
+  }
 }
