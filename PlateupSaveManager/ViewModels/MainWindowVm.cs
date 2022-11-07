@@ -16,16 +16,11 @@ namespace PlateupSaveManager.ViewModels
     {
         private IConfiguration _configuration;
         public event PropertyChangedEventHandler? PropertyChanged;
-        private void OnPropertyChanged([CallerMemberName]string? caller = null) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(caller));
 
         Page _currentWindow; public Page CurrentWindow
         {
             get => _currentWindow;
-            set
-            {
-                _currentWindow = value;
-                OnPropertyChanged();
-            }
+            set => this.SetProperty(ref _currentWindow, value, PropertyChanged);
         }
 
         public MainWindowVm(IConfiguration configuration)

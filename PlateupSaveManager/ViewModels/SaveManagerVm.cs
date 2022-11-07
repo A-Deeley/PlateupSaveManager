@@ -31,11 +31,15 @@ namespace PlateupSaveManager.ViewModels
             get => Path.Combine(localLowPath, _relativePlateupSaveDir);
             set => this.SetProperty(ref _relativePlateupSaveDir, value, PropertyChanged);
         }
-
         string _saveName; public string SaveName
         {
             get => _saveName;
             set => this.SetProperty(ref _saveName, value, PropertyChanged);
+        }
+
+        SaveFile? _currentSave; public string CurrentSaveName
+        {
+            get => SaveFiles.FirstOrDefault(file => file.IsActive, null)?.Name ?? "Unsaved game";
         }
 
         ObservableCollection<SaveFile> _saveFiles; public ObservableCollection<SaveFile> SaveFiles
@@ -44,16 +48,22 @@ namespace PlateupSaveManager.ViewModels
             set => this.SetProperty(ref _saveFiles, value, PropertyChanged);
         }
 
+        SaveFile _selectedSave; public SaveFile SelectedSave
+        {
+            get => _selectedSave;
+            set => this.SetProperty(ref _selectedSave, value, PropertyChanged);
+        }
+
         public event PropertyChangedEventHandler? PropertyChanged;
         public event EventHandler<ChangePageEventArgs> ChangePage;
 
         #region ICommands
-        RelayCommand Save { get; set; }
-        RelayCommand NewSave { get; set; }
-        RelayCommand ActivateSelectedSave { get; set; }
-        RelayCommand DeactivateSelectedSave { get; set; }
-        RelayCommand RenameSelectedSave { get; set; }
-        RelayCommand DeleteSelectedSave { get; set; }
+        public RelayCommand Save { get; set; }
+        public RelayCommand NewSave { get; set; }
+        public RelayCommand ActivateSelectedSave { get; set; }
+        public RelayCommand DeactivateSelectedSave { get; set; }
+        public RelayCommand RenameSelectedSave { get; set; }
+        public RelayCommand DeleteSelectedSave { get; set; }
 
         #region Executes
         private void Save_Execute(object _)
@@ -89,7 +99,7 @@ namespace PlateupSaveManager.ViewModels
         #region CanExecutes
         private bool Save_CanExecute(object _)
         {
-            return true;
+            return _currentSave is null;
         }
 
         private bool NewSave_CanExecute(object _)
@@ -97,25 +107,7 @@ namespace PlateupSaveManager.ViewModels
             return true;
         }
 
-        private bool Activate_CanExecute(object _)
-        {
-            return true;
-        }
-
-        private bool Deactivate_CanExecute(object _)
-        {
-            return true;
-        }
-
-        private bool Rename_CanExecute(object _)
-        {
-            return true;
-        }
-
-        private bool Delete_CanExecute(object _)
-        {
-            return true;
-        }
+        private bool IsSaveSelected(object _) => SelectedSave is not null;
         #endregion
 
         #endregion
@@ -132,10 +124,10 @@ namespace PlateupSaveManager.ViewModels
         {
             Save = new(Save_Execute, Save_CanExecute);
             NewSave = new(NewSave_Execute);
-            ActivateSelectedSave = new(Activate_Execute, Activate_CanExecute);
-            DeactivateSelectedSave = new(Deactivate_Execute, Deactivate_CanExecute);
-            RenameSelectedSave = new(Rename_Execute, Rename_CanExecute);
-            DeleteSelectedSave = new(Delete_Execute, Delete_CanExecute);
+            ActivateSelectedSave = new(Activate_Execute, IsSaveSelected);
+            DeactivateSelectedSave = new(Deactivate_Execute, IsSaveSelected);
+            RenameSelectedSave = new(Rename_Execute, IsSaveSelected);
+            DeleteSelectedSave = new(Delete_Execute, IsSaveSelected);
         }
     }
 }

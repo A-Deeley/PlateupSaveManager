@@ -12,20 +12,23 @@ namespace PlateupSaveManager
     {
         public event PropertyChangedEventHandler? PropertyChanged;
 
+        bool _isActive; public bool IsActive
+        {
+            get => _isActive;
+            set => this.SetProperty(ref _isActive, value, PropertyChanged);
+        }
         string _name; public string Name
         {
             get => _name;
             set => this.SetProperty(ref _name, value, PropertyChanged);
         }
 
-        public SaveFile()
-        {
-
-        }
-
         public SaveFile(string name)
+            :base()
         {
-            Name = name;
+            IsActive = name.EndsWith("_current");
+            Name = name.Split("_")[0];
+
         }
     }
 }
