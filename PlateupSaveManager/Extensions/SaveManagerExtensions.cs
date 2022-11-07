@@ -1,6 +1,8 @@
 ﻿using PlateupSaveManager.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,6 +18,12 @@ namespace PlateupSaveManager.Extensions
         {
             page.DataContext = context;
             return page;
+        }
+
+        internal static ObservableCollection<TClass> ConvertToObservable<TClass>(this IEnumerable<TClass> list)
+            where TClass : class
+        {
+            return new ObservableCollection<TClass>(list);
         }
     }
 }
